@@ -1,6 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
+    id("dev.shreyaspatil.compose-compiler-report-generator")
 }
 
 android {
@@ -66,4 +71,18 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Hilt Navigation
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // DI
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }
