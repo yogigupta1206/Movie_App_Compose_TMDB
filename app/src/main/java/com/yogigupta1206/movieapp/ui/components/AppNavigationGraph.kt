@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.yogigupta1206.movieapp.presentation.home.HomeScreen
 
 @Composable
 fun AppNavigationGraph() {
@@ -20,7 +21,7 @@ fun AppNavigationGraph() {
     ) {
 
         composable(Screens.HomePage.route) {
-            //HomeScreen(onNavigateToMovieDetails = { navController.onNavigateToMovieDetails(it) })
+            HomeScreen(onNavigateToMovieDetails = { navController.onNavigateToMovieDetails(it) })
         }
 
         composable(
@@ -39,6 +40,6 @@ fun AppNavigationGraph() {
     }
 }
 
-fun NavController.onNavigateToMovieDetails(id: String) =
+fun NavController.onNavigateToMovieDetails(id: Int) =
     navigate(Screens.MovieDetailsPage.route + "?id=$id")
 
