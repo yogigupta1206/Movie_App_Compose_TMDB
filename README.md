@@ -26,7 +26,7 @@ Image Loading: Coil
 ### Clone the Repository:
 
 ```console
-git clone https://github.com/<your-username>/<your-repository-name>.git
+git clone https://github.com/yogigupta1206/Movie_App_Compose_TMDB.git
 ```
 
 ### Run the App:
