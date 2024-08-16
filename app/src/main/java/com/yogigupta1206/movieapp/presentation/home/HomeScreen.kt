@@ -31,12 +31,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.yogigupta1206.movieapp.presentation.CommonViewModel
 import com.yogigupta1206.movieapp.presentation.home.components.MovieItem
 
 @Composable
 fun HomeScreen(
-    onNavigateToMovieDetails: (Int) -> Unit,
-    viewModel: HomeScreenViewModel = hiltViewModel()
+    onNavigateToMovieDetails: () -> Unit,
+    viewModel: CommonViewModel = hiltViewModel()
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
@@ -45,6 +46,7 @@ fun HomeScreen(
     Scaffold(
         content = { padding ->
             HomeScreenContent(
+                viewModel,
                 padding,
                 uiState,
                 searchText,
@@ -60,11 +62,12 @@ fun HomeScreen(
 
 @Composable
 fun HomeScreenContent(
+    viewModel: CommonViewModel,
     padding: PaddingValues,
     uiState: HomeScreenUiState,
     searchText: String,
     onSearchTextChange: (String) -> Unit,
-    onNavigateToMovieDetails: (Int) -> Unit,
+    onNavigateToMovieDetails: ()-> Unit,
     onRetry: () -> Unit
 ) {
     Column(
@@ -95,7 +98,8 @@ fun HomeScreenContent(
                 ) {
                     items(uiState.movieData){
                         MovieItem(it, onClick = {
-                            onNavigateToMovieDetails(it.id)
+                            viewModel.updateSelectedMovie(it)
+                            onNavigateToMovieDetails()
                         })
                     }
                 }

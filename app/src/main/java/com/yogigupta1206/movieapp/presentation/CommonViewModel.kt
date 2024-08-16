@@ -1,9 +1,13 @@
-package com.yogigupta1206.movieapp.presentation.home
+package com.yogigupta1206.movieapp.presentation
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yogigupta1206.movieapp.domain.model.MovieEntity
 import com.yogigupta1206.movieapp.domain.repository.MovieRepo
+import com.yogigupta1206.movieapp.presentation.home.HomeScreenUiState
+import com.yogigupta1206.movieapp.presentation.movie_info.MovieInfoUiState
 import com.yogigupta1206.movieapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +20,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor(
+class CommonViewModel @Inject constructor(
     private val repository: MovieRepo
 ) : ViewModel() {
 
@@ -28,6 +32,9 @@ class HomeScreenViewModel @Inject constructor(
     private var job: Job? = null
 
     private var allMovies: List<MovieEntity> = emptyList()
+
+    private val _movieDetails: MutableLiveData<MovieInfoUiState> = MutableLiveData(MovieInfoUiState())
+    val movieDetails: LiveData<MovieInfoUiState> = _movieDetails
 
     init {
         fetchData()
@@ -61,6 +68,10 @@ class HomeScreenViewModel @Inject constructor(
     fun onSearchTextChange(newText: String) {
         _searchText.value = newText
         updateUiState(allMovies)
+    }
+
+    fun updateSelectedMovie(movie: MovieEntity){
+        _movieDetails.value = MovieInfoUiState().copy(movie = movie)
     }
 
     private fun updateUiState(movies: List<MovieEntity>) {
