@@ -47,3 +47,12 @@ A video demonstrating the app's functionality is included in the repository (ref
 - Clean, readable, and maintainable code
 - Complete implementation of all features
 - Clear commit history demonstrating development progress
+
+### Potential Improvements Can Be Done:
+
+- Maintaining String values in the strings.xml file
+- Dimen can be maintained in the same way.
+- Styles can be created instead of setting everything in the Text compose
+- Pull to refresh can be introduced.
+- Diff Util can be added
+- Debounce in search can be used.
